@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jymce Portfolio</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/ff87496a7c.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div id="header">
+        <div class="container">
+            <nav>
+                <img src="images/j_removed.png" class="logo">
+                <ul id="sidemenu">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Hobbies</a></li>
+                    <li><a href="#portfolio">Skill Set</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
+                </ul>
+                <i class="fa-solid fa-bars" onclick="openmenu()"></i>            
+            </nav>
+            <div class="header-text">
+                <p>BSCS Undergrad Student</p>
+                <h1>Hi, I'm <span>Jymce</span><br></h1>
+            </div>
+        </div>
+    </div>
+    <!-- About -->
+    <div id="about" class="about">
+        <div class="container">
+            <div class="row">
+                <div class="about-col-1">
+                    <img src="images/jymceabt.jpeg">
+                </div>
+                <div class="about-col-2">
+                    <h1 class="sub-title">About Me</h1>
+                    <p class="abtme"> I am Jymce Brian C. Bertillo, currently I am a bonified student at CvSU - Bacoor
+                        taking Bachelor of Science in Computer Science. And as a 3rd year CS student
+                        I am glad to be part of this academic year that would embark to another whole
+                        new journey
+                    </p>
+
+                    <div class="tab-titles">
+                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                        <p class="tab-links" onclick="opentab('education')">Education</p>
+                    </div>
+                    
+                    <div class="tab-contents active-tab" id="skills">
+                        <ul>
+                            <li> <span>Web Development</span> <br>Web Base Development</li>
+                            <li> <span>App Development </span><br>Build Desktop Base Application</li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-contents" id="education">
+                        <ul>
+                            <li> <span>2024 - College Undergrad </span><br>BSCS Undergrad at CvSU Bacoor</li>
+                            <li> <span>2021 - Senior High School</span> </span><br>STEM Strand At SFILBHSI Bacoor</li>
+                            <li> <span>2013 - Elementary</span> </span><br>Norquins Living Legacy Academy</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services -->
+
+    <div id="services">
+        <div class="container">
+            <h1 class="sub-title">My Hobbies</h1>
+            <div class="service-list">
+                <div>
+                    <i class="fa-solid fa-laptop"></i>
+                    <h2>Programming</h2>
+                    <p>Create simple projects in my free time.</p>
+                </div>
+                <div>
+                    <i class="fa-solid fa-utensils"></i>
+                    <h2>Eat</h2>
+                    <p> Eat different variety of food.</p>
+                </div>
+                <div>
+                    <i class="fa-solid fa-gamepad"></i>
+                    <h2>Play</h2>
+                    <p>Play games at my leisure time. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio -->
+
+    <div id="portfolio">
+        <div class="container">
+            <h1 class="sub-title">Skill Set</h1>
+            <div class="work-list">
+
+                <div class="work">
+                    <img src="images/JAVA.png" alt="Java">
+                    <div class="layer">
+                        <h2>Java</h2> <br>
+                        <p>A Popular, object-oriented programming language that runs on many devices and is used for a variety of applications</p>
+                    </div>
+                </div>
+
+                <div class="work">
+                    <img src="images/PYTHON.png" alt="Python">
+                    <div class="layer">
+                        <h2>Python</h2><br>
+                        <p>Interpreted, object-oriented, high-level programming language with dynamic semantics</p>
+                    </div>
+                </div>
+
+                <div class="work">
+                    <img src="images/SVELTE.png" alt="Svelte">
+                    <div class="layer">
+                        <h2>Svelte</h2><br>
+                        <p>A revolutionary web development framework that transforms the way applications are built.</p>
+                    </div>
+                </div>
+
+            </div>
+            <a href="#" class="btn">See More</a>
+        </div>
+    </div>
+<!-- contact  -->
+ <div id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="sub-title">Contact Me</h1>
+                <p> <i class="fa-solid fa-paper-plane"></i> jymcebrian@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i>0999 763 2457</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/jymce.bertillo/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://x.com/JBCB32446518" target="_blank"><i class="fa-brands fa-square-x-twitter"></i></i></a>
+                    <a href="https://www.instagram.com/jymceeee/?hl=en"target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+                <a href="Bertillo Information.pdf" download class="btn btn2">Donwload Information</a>
+            </div>
+            <div class="contact-right">
+                <form name="submit-to-google-sheet">
+                    <input type="text" name="Name" placeholder="Your Name" required>
+                    <input type="email" name="Email" placeholder="Your Email" required>
+                    <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                    <button type="submit" class="btn btn2">Submit</button>
+                </form>
+                <span id="msg"> </span>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>Copyright © Jymce Brian C. Bertillo</p>
+    </div>
+ </div>
+
+ <div id="dialog-overlay"></div>
+
+ <div id="dialog-box">
+     <p>Message Sent Successfully!</p>
+     <button onclick="closeDialog()">OK</button>
+ </div>
+
+ <div id="loading-message">Submitting...</div>
+
+</body>
+
+
+<script>
+    var tablinks = document.getElementsByClassName("tab-links")
+    var tabcontents = document.getElementsByClassName("tab-contents")
+
+    function opentab(tabname){
+        for(tablink of tablinks){
+            tablink.classList.remove("active-link")
+        }
+        for(tabcontent of tabcontents){
+            tabcontent.classList.remove("active-tab")
+        }
+        event.currentTarget.classList.add("active-link")
+        document.getElementById(tabname).classList.add("active-tab")
+    }
+
+</script>
+
+<script>
+    var sidemenu = document.getElementById("sidemenu");
+
+    function openmenu(){
+        sidemenu.style.right = "0";
+    }
+    function closemenu(){
+        sidemenu.style.right = "-200px";
+    }
+</script>
+
+<script>
+
+    const scriptURL = 'https://script.google.com/macros/s/AKfycby5ievrMRYVtEbLOuEWceGr01k2andkuajq1i_z-f1W-ZxLWp001oHQvAGzLcMncL6B/exec'
+    const form = document.forms['submit-to-google-sheet']
+    const dialogOverlay = document.getElementById("dialog-overlay");
+    const dialogBox = document.getElementById("dialog-box");
+    const loadingMessage = document.getElementById("loading-message");
+    const submitButton = form.querySelector('button[type="submit"]');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            showLoading();
+            submitButton.disabled = true;  // Disable the submit button to prevent multiple submissions
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => {
+                    hideLoading();
+                    openDialog();
+                    form.reset();
+                    submitButton.disabled = false;  // Re-enable the submit button
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    hideLoading();
+                    submitButton.disabled = false;  // Re-enable the submit button even on error
+                });
+        });
+
+        function showLoading() {
+            loadingMessage.style.display = 'block';
+        }
+
+        function hideLoading() {
+            loadingMessage.style.display = 'none';
+        }
+
+        function openDialog() {
+            dialogOverlay.style.display = 'block';
+            dialogBox.style.display = 'block';
+        }
+
+        function closeDialog() {
+            dialogOverlay.style.display = 'none';
+            dialogBox.style.display = 'none';
+        }
+
+  </script>
+</html>
