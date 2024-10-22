@@ -291,6 +291,7 @@ nav ul li a:hover::after{
 }
 .contact-right form{
     width: 100%;
+    text-align: center;
 }
 form input, form textarea{
     width: 100%;
@@ -304,6 +305,7 @@ form input, form textarea{
     border-radius: 15px;
 }
 form .btn2{
+    display: inline;
     padding: 14px 60px;
     font-size: 18px;
     margin-top: 20px;
