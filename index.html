@@ -20,9 +20,8 @@
                     <li><a href="#services">Hobbies</a></li>
                     <li><a href="#portfolio">Skill Set</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
                 </ul>
-                <i class="fa-solid fa-bars" onclick="openmenu()"></i>            
+                <i class="fa-solid fa-bars"></i>            
             </nav>
             <div class="header-text">
                 <p>BSCS Undergrad Student</p>
@@ -127,7 +126,7 @@
                 </div>
 
             </div>
-            <a href="#" class="btn">Return</a>
+            <a href="#" class="btn">See More</a>
         </div>
     </div>
 <!-- contact  -->
@@ -143,16 +142,16 @@
                     <a href="https://x.com/JBCB32446518" target="_blank"><i class="fa-brands fa-square-x-twitter"></i></i></a>
                     <a href="https://www.instagram.com/jymceeee/?hl=en"target="_blank"><i class="fa-brands fa-instagram"></i></a>
                 </div>
-                <a href="Bertillo Information.pdf" download class="btn btn2">Donwload Information</a>
+                <a href="Bertillo Information.pdf" download class="btn btn2">Download Information</a>
             </div>
             <div class="contact-right">
                 <form name="submit-to-google-sheet">
                     <input type="text" name="Name" placeholder="Your Name" required>
                     <input type="email" name="Email" placeholder="Your Email" required>
                     <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                        <div class="submit-container"><span id="msg"></span> </div>
                     <button type="submit" class="btn btn2">Submit</button>
                 </form>
-                <span id="msg"> </span>
             </div>
         </div>
     </div>
@@ -191,61 +190,97 @@
 </script>
 
 <script>
-    var sidemenu = document.getElementById("sidemenu");
+    const menuIcon = document.querySelector('nav .fa-bars');
+const navbar = document.querySelector('nav ul');
+const navbarLinks = navbar.querySelectorAll('a'); // Select all links in the navbar
 
-    function openmenu(){
-        sidemenu.style.right = "0";
+menuIcon.addEventListener('click', () => {
+    navbar.classList.toggle('show');
+    if (navbar.classList.contains('show')) {
+        navbar.style.opacity = 1;
+        navbar.style.transform = 'translateY(0)';
     }
-    function closemenu(){
-        sidemenu.style.right = "-200px";
-    }
+});
+
+// Add event listener to each navbar link
+navbarLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        navbar.classList.remove('show'); // Close the navbar
+    });
+});
 </script>
 
 <script>
-
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxJOPwiN2LBZ0qEnD64LRBN4fmFi7lyv5rvisvLoceCUHv98nrXY7q1wkhx1ePQM9Z6/exec'
     const form = document.forms['submit-to-google-sheet']
     const dialogOverlay = document.getElementById("dialog-overlay");
     const dialogBox = document.getElementById("dialog-box");
     const loadingMessage = document.getElementById("loading-message");
     const submitButton = form.querySelector('button[type="submit"]');
+    const textarea = form.querySelector('textarea[name="Message"]'); // Select the textarea
+    const emailInput = form.querySelector('input[name="Email"]'); // Select the email input
+    const msgSpan = document.getElementById("msg"); // Select the message span
 
-        form.addEventListener('submit', e => {
-            e.preventDefault();
+    form.addEventListener('submit', (e) => {
+        e.preventDefault(); // Prevent default form submission
+
+        // Email validation using a regular expression
+        const emailRegex = /^[^\s@]+@[^\s@]+\.(com|net|org|info|edu|gov|mil|co\.uk|ca|au|de|fr|jp|cn|br|in|ru|mx|it|es|kr|se|no|dk|nl|be|ch|at|cz|pl|pt|tr|gr|ie|ro|sk|ua|by|hu|lt|lv|ee|fi|bg|rs|hr|si|mk|al|ba|me|ge|az|uz|tj|kg|kz|tm|mn|lk|vn|th|id|my|ph|sg|hk|tw|ae|sa|eg|ma|dz|tn|ly|om|qa|kw|bh|iq|il|ps|jo|lb|sy|ye|pk|bd|af|np|bt|mn|kh|la|mm|id|my|ph|sg|vn|th|bn|mm|lk|in|pk|np|bd|af|kg|tj|uz|tm|kz|az|ge|am|by|md|ua|ru|lt|lv|ee|fi|se|no|dk|nl|be|lu|ie|is|fo|gl|gg|im|je|ms|sh|tc|vg|bm|ky|ai|ag|dm|gd|ms|vc|tt|kn|lc|sx|cu|do|jm|ht|pr|pa|pe|py|bo|cl|co|ec|gy|gf|mq|gp|re|tf|bl|pf|wf|pm|nc|nu|tv|ws|fm|mh|as|tk|to|pw|ai|me|tl|gd|gg|je|ms|sh|tc|vg|bm|ky|ai|ag|dm|gd|ms|vc|tt|kn|lc|sx|cu|do|jm|ht|pr|pa|pe|py|bo|cl|co|ec|gy|gf|mq|gp|re|tf|bl|pf|wf|pm|nc|nu|tv|ws|fm|mh|as|tk|to|pw|ai|me|tl|gd|gg|je|ms|sh|tc|vg|bm|ky|ai|ag|dm|gd|ms|vc|tt|kn|lc|sx|cu|do|jm|ht|pr|pa|pe|py|bo|cl|co|ec|gy|gf|mq|gp|re|tf|bl|pf|wf|pm|nc|nu|tv|ws|fm|mh|as|tk|to|pw|ai|me|tl)$/;    
+        if (!emailRegex.test(emailInput.value)) {
+            msgSpan.textContent = "Please enter a valid email address.";
+            msgSpan.style.color = "red";
+
+            // Hide the message after 5 seconds
+            setTimeout(() => {
+                msgSpan.textContent = ""; 
+            }, 3000); 
+        } else if (textarea.value.trim() === '') {
+            msgSpan.textContent = "Please compose a message.";
+            msgSpan.style.color = "red";
+
+            // Hide the message after 5 seconds
+            setTimeout(() => {
+                msgSpan.textContent = ""; 
+            }, 3000); 
+        } else {
+            // Email is valid, proceed with submission
             showLoading();
-            submitButton.disabled = true;  // Disable the submit button to prevent multiple submissions
+            submitButton.disabled = true;
 
             fetch(scriptURL, { method: 'POST', body: new FormData(form) })
                 .then(response => {
                     hideLoading();
                     openDialog();
                     form.reset();
-                    submitButton.disabled = false;  // Re-enable the submit button
+                    submitButton.disabled = false;
+                    msgSpan.textContent = ""; 
                 })
                 .catch(error => {
                     console.error('Error!', error.message);
                     hideLoading();
-                    submitButton.disabled = false;  // Re-enable the submit button even on error
+                    submitButton.disabled = false;
+                    msgSpan.textContent = ""; 
                 });
-        });
-
-        function showLoading() {
-            loadingMessage.style.display = 'block';
         }
+    });
 
-        function hideLoading() {
-            loadingMessage.style.display = 'none';
-        }
+    function showLoading() {
+        loadingMessage.style.display = 'block';
+    }
 
-        function openDialog() {
-            dialogOverlay.style.display = 'block';
-            dialogBox.style.display = 'block';
-        }
+    function hideLoading() {
+        loadingMessage.style.display = 'none';
+    }
 
-        function closeDialog() {
-            dialogOverlay.style.display = 'none';
-            dialogBox.style.display = 'none';
-        }
+    function openDialog() {
+        dialogOverlay.style.display = 'block';
+        dialogBox.style.display = 'block';
+    }
 
-  </script>
+    function closeDialog() {
+        dialogOverlay.style.display = 'none';
+        dialogBox.style.display = 'none';
+    }
+</script>
+
 </html>
