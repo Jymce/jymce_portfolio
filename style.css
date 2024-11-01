@@ -33,13 +33,15 @@ nav{
 nav ul li{
     display: inline-block;
     list-style: none;
-    margin: 10px 20px;
+    margin: 5px 5px;
+    padding: 5px 5px;
 }
 nav ul li a{
     color: #fff;
     text-decoration: none;
     font-size: 18px;
     position: relative;
+    padding: 5px 10px;
 }
 nav ul li a::after{
     content: '';
@@ -197,7 +199,7 @@ nav ul li a:hover::after{
 .work img{
     width: 100%;
     border-radius: 10px;
-    border: 5px solid white;
+    border: 5px solid #160d08;
     display:  block;
     transition: transform 1s;
 }
@@ -293,6 +295,9 @@ nav ul li a:hover::after{
     width: 100%;
     text-align: center;
 }
+.contact-right form textarea{
+    resize: none;
+}
 form input, form textarea{
     width: 100%;
     border: 0;
@@ -385,45 +390,58 @@ form .btn2{
 
 
 /*  css for small screen */
+
 nav .fa-solid{
     display: none;
 }
 @media only screen and (max-width: 600px){
-    #header{
-        background-image: url(images/profile-phone.png);
+    #header {
+        background-image: url(images/profile-phone.png); /* Keep background image */
+        background-size: cover;
+        background-position: center;
     }
-    .header-text{
+    .header-text {
         margin-top: 100%;
         font-size: 16px;
         padding-bottom: 1000px;
     }
-    .header-text h1{
+    .header-text h1 {
         font-size: 30px;
     }
-    nav .fa-solid{
+    nav {
+        position: relative; /* Add position: relative to the parent */
+    }
+    nav .fa-solid {
         display: block;
         font-size: 25px;
-    }
-    nav ul{
-        background: #ff004f;
-        position: fixed;
-        top: 0;
-        right: -200px;
-        width: 200px;
-        height: 100vh;
-        padding-top: 50px;
-        z-index: 2;
-        transition: right 0.5s;
-    }
-    nav ul li{
-        display: block;
-        margin: 25px;
-    }
-    nav ul .fa-solid{
-        position: absolute;
-        top: 25px;
-        left: 25px;
         cursor: pointer;
+        position: relative; /* Add position: relative to the parent */
+    }
+    nav ul {
+        position: absolute; /* Position it relative to the parent */
+        top: 100%; /* Place it below the parent */
+        right: 10px;
+        width: 150px; /* Make it full width */
+        background: #262626;
+        padding: 5px 10px; /* Add padding for better visual spacing */
+        display: none; /* Hide it by default */
+        z-index: 10; /* Ensure it appears above other elements */
+        opacity: 0; /* Initially hidden */
+        transform: translateY(10px); /* Initially slightly off-screen */
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Add transition */
+        border-radius: 5px; /* Add rounded corners */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a shadow */
+    }
+    nav ul li {
+        display: block;
+        margin: 5px 0; /* Adjust spacing as needed */
+        text-align: center; /* Center the links */
+        padding: 5px 5px;
+    }
+    nav ul.show {
+        display: block; /* Show the navbar when the 'show' class is added */
+        opacity: 1; /* Set opacity to 1 */
+        transform: translateY(0); /* Reset transform */
     }
     .sub-title{
         font-size: 40px;
@@ -447,11 +465,13 @@ nav .fa-solid{
     .copyright{
         font-size: 14px;
     }
+    }
+
+.submit-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
 #msg{
-    color: #61b752;
-    margin-top: -40px;
-    display: block;
-
+    margin-bottom: 2px;
 }
