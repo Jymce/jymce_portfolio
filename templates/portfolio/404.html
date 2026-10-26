@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Page not found — Jymce Bertillo{% endblock %}
+
+{% block content %}
+<main class="mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center px-4 py-24 text-center sm:px-6 lg:px-10">
+    <span class="font-mono text-sm text-muted-foreground">// 404</span>
+    <h1 class="mt-2 text-4xl font-bold tracking-tight sm:text-5xl">Page not found</h1>
+    <p class="mt-4 text-lg text-muted-foreground">
+        The page you're looking for doesn't exist or may have moved.
+    </p>
+    <a href="/" class="btn btn-primary btn-lg mt-8">
+        {% include "portfolio/components/ui/icon.html" with name='arrow-right' class='h-4 w-4 rotate-180' %}
+        Back to home
+    </a>
+</main>
+{% endblock %}

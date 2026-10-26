@@ -129,3 +129,11 @@ def project_detail(request, slug):
     if project is None:
         raise Http404("Project not found")
     return render(request, "portfolio/project_detail.html", {"project": project})
+
+
+def not_found(request):
+    return render(request, "portfolio/404.html")
+
+
+def page_not_found(request, exception):
+    return render(request, "portfolio/404.html", status=404)
