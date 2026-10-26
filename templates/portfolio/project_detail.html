@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ project.title }} — Jymce Bertillo{% endblock %}
+
+{% block content %}
+<main class="mx-auto flex min-h-screen max-w-3xl flex-col justify-center px-4 py-24 sm:px-6 lg:px-10">
+    <div>
+        <a href="{% url 'portfolio:home' %}#projects" class="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+            {% include "portfolio/components/ui/icon.html" with name='arrow-right' class='h-4 w-4 rotate-180' %}
+            Back to projects
+        </a>
+    </div>
+
+    <div class="card mt-8 p-8 sm:p-12">
+        {% if project.logo %}
+        <img src="{% static project.logo %}" alt="{{ project.title }} logo"
+             class="h-16 w-auto rounded-xl shadow-sm sm:h-20 dark:bg-white/90 dark:p-3">
+        {% else %}
+        <div class="flex h-20 w-20 items-center justify-center rounded-2xl bg-muted text-muted-foreground">
+            {% include "portfolio/components/ui/icon.html" with name='folder' class='h-10 w-10' %}
+        </div>
+        {% endif %}
+
+        <h1 class="mt-8 text-3xl font-bold tracking-tight sm:text-4xl">{{ project.title }}</h1>
+        <p class="mt-4 text-lg leading-relaxed text-muted-foreground">{{ project.details|default:project.description }}</p>
+
+        <div class="mt-6 flex flex-wrap gap-1.5">
+            {% for tech in project.tech %}
+            <span class="badge badge-secondary rounded-md px-2 py-0.5">{{ tech }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="mt-10 flex flex-wrap gap-3">
+            {% if project.demo %}
+            <a href="{{ project.demo }}" target="_blank" rel="noopener" class="btn btn-primary btn-lg">
+                Visit {{ project.title }} {% include "portfolio/components/ui/icon.html" with name='external-link' class='h-4 w-4' %}
+            </a>
+            {% endif %}
+            {% if project.repo %}
+            <a href="{{ project.repo }}" target="_blank" rel="noopener" class="btn btn-outline btn-lg">
+                View code {% include "portfolio/components/ui/icon.html" with name='github' class='h-4 w-4' %}
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</main>
+{% endblock %}

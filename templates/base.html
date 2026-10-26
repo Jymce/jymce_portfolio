@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Jymce Bertillo — Portfolio{% endblock %}</title>
+    <meta name="description" content="Portfolio of Jymce Bertillo — Django & backend developer.">
+    <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <script src="{% static 'js/sound.js' %}" defer></script>
+
+    <script>
+        // Apply theme before paint to avoid flash
+        if (localStorage.theme === 'dark' ||
+            (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</head>
+<body class="bg-background text-foreground font-sans antialiased">
+    {% block content %}{% endblock %}
+
+    <script>
+        function syncThemeIcons() {
+            const isDark = document.documentElement.classList.contains('dark');
+            document.querySelectorAll('[data-icon-sun]').forEach(el => el.classList.toggle('hidden', isDark));
+            document.querySelectorAll('[data-icon-moon]').forEach(el => el.classList.toggle('hidden', !isDark));
+        }
+        function applyTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.theme = isDark ? 'dark' : 'light';
+            syncThemeIcons();
+        }
+        // Circular reveal radiating from the clicked button (View Transitions API)
+        function toggleTheme(e) {
+            if (!document.startViewTransition || !e) { applyTheme(); return; }
+            const x = e.clientX, y = e.clientY;
+            const radius = Math.hypot(
+                Math.max(x, window.innerWidth - x),
+                Math.max(y, window.innerHeight - y)
+            );
+            const transition = document.startViewTransition(applyTheme);
+            transition.ready.then(() => {
+                document.documentElement.animate(
+                    { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+                    { duration: 600, easing: 'ease-in-out', pseudoElement: '::view-transition-new(root)' }
+                );
+            }).catch(() => {});
+        }
+        function openSidebar() {
+            document.getElementById('mobile-sidebar').classList.remove('hidden');
+        }
+        function closeSidebar() {
+            document.getElementById('mobile-sidebar').classList.add('hidden');
+        }
+
+        // Sync icon visibility with current theme on load
+        document.addEventListener('DOMContentLoaded', syncThemeIcons);
+
+        // Scrollspy — highlight the sidebar link for the section in view
+        const navSpy = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    document.querySelectorAll('[data-nav]').forEach(link => {
+                        link.classList.toggle('nav-active', link.dataset.nav === e.target.id);
+                    });
+                }
+            });
+        }, { rootMargin: '-40% 0px -55% 0px' });
+        document.querySelectorAll('main section[id]').forEach(s => navSpy.observe(s));
+
+        // Scroll-reveal animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('reveal-visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

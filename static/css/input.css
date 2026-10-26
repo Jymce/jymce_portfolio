@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* shadcn/ui design tokens */
+@layer base {
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 222.2 84% 4.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 222.2 84% 4.9%;
+        --primary: 222.2 47.4% 11.2%;
+        --primary-foreground: 210 40% 98%;
+        --secondary: 210 40% 96.1%;
+        --secondary-foreground: 222.2 47.4% 11.2%;
+        --muted: 210 40% 96.1%;
+        --muted-foreground: 215.4 16.3% 46.9%;
+        --accent: 210 40% 96.1%;
+        --accent-foreground: 222.2 47.4% 11.2%;
+        --border: 214.3 31.8% 91.4%;
+        --input: 214.3 31.8% 91.4%;
+        --ring: 222.2 84% 4.9%;
+        --radius: 0.75rem;
+    }
+    .dark {
+        --background: 0 0% 0%;
+        --foreground: 0 0% 98%;
+        --card: 0 0% 4%;
+        --card-foreground: 0 0% 98%;
+        --primary: 0 0% 98%;
+        --primary-foreground: 0 0% 9%;
+        --secondary: 0 0% 14%;
+        --secondary-foreground: 0 0% 98%;
+        --muted: 0 0% 14%;
+        --muted-foreground: 0 0% 64%;
+        --accent: 0 0% 14%;
+        --accent-foreground: 0 0% 98%;
+        --border: 0 0% 16%;
+        --input: 0 0% 16%;
+        --ring: 0 0% 83%;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+/* Disable the default crossfade so the circular reveal clip-path drives the swap */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+/* Component variants — the Django-template equivalent of shadcn/ui's cva() classes.
+   Compose like: class="btn btn-outline btn-lg" or class="badge badge-secondary". */
+@layer components {
+    .btn {
+        @apply inline-flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors;
+    }
+    .btn-primary {
+        @apply bg-primary text-primary-foreground shadow hover:bg-primary/90;
+    }
+    .btn-outline {
+        @apply border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground;
+    }
+    .btn-secondary {
+        @apply bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80;
+    }
+    .btn-ghost {
+        @apply hover:bg-accent hover:text-accent-foreground;
+    }
+    .btn-sm {
+        @apply h-9 rounded-md px-3;
+    }
+    .btn-lg {
+        @apply h-11 rounded-md px-8;
+    }
+    .btn-icon {
+        @apply h-9 w-9 p-0;
+    }
+
+    .badge {
+        @apply inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors;
+    }
+    .badge-secondary {
+        @apply border-transparent bg-secondary text-secondary-foreground;
+    }
+    .badge-outline {
+        @apply text-foreground;
+    }
+
+    .card {
+        @apply rounded-lg border border-border bg-card text-card-foreground shadow-sm;
+    }
+
+    .nav-link {
+        @apply flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground;
+    }
+    .nav-active {
+        @apply bg-accent text-accent-foreground;
+    }
+}
+
+/* Scroll-reveal animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+::selection {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+}
