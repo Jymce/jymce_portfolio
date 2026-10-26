@@ -2,6 +2,7 @@
   "name": "jymce-portfolio",
   "compatibility_date": "2026-10-26",
   "assets": {
-    "directory": "./dist"
+    "directory": "./dist",
+    "not_found_handling": "404-page"
   }
 }
